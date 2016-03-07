@@ -103,7 +103,7 @@ function setWord(word , changeOffset){
 
     var text = $('#text');
     text.text(word);
-    $('#line').attr('style' , 'width: '+ (getTextWidth(word , '32px samaritanfont') + 30)+'px;');
+    $('#line').attr('style' , 'width: '+ (getTextWidth(word , '32px magdacleanmono-bold') + 30)+'px;');
 }
 
 

@@ -15,7 +15,7 @@
     along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
 @font-face {
-    font-family: samaritanfont;
+    font-family: magdacleanmono-bold;
     src: url(font/magdacleanmono-bold.ttf);
 }
 
@@ -53,7 +53,7 @@ body, html {
 }
 
 #text{
-    font-family: "samaritanfont", serif;
+    font-family: "magdacleanmono-bold", serif;
     font-size: 32px;
     text-transform: uppercase;
     margin-bottom: 0;
