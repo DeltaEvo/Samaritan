@@ -12,13 +12,12 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ along with Samaritan. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var wordTime = 750;
 var thinkTime = 1750;
 var offsetMin = 4;
-
 
 function blink() {
     $('.blink').fadeOut(750).fadeIn(750);
@@ -74,7 +73,6 @@ function getTextWidth(text, font) {
     return metrics.width;
 }
 
-
 function nextText(array , index){
     if(array == undefined)return;
     setTimeout(function(){
@@ -94,7 +92,6 @@ function setText(phrase){
     if(phrase == undefined)return;
     nextText(phrase.split(' ') , 0);
 }
-
 
 function setWord(word , changeOffset){
     removeTextOffset();
