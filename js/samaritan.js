@@ -17,7 +17,8 @@
 
 wordTime = 750;
 thinkTime = 1750;
-lengthMin = 3;
+lengthMin = 1;
+lengthMax = 3;
 completeMax = 4;
 font = '32px magdacleanmono-bold';
 chance = 0.5;
@@ -75,14 +76,15 @@ function nextText(array , index , changeOffset){
         if(index == array.length)setWord('' , false , true ,true);
         else{
             var text = array[index];
-            changeOffset = changeOffset || text.length <= lengthMin;
+            var c = text.length <= lengthMax && text.length > lengthMin;
+            changeOffset = changeOffset || c;
             if(index == 0){
                 setScrambled(text ,changeOffset, function(){
-                    nextText(array , index+1 , text.length <= lengthMin);
+                    nextText(array , index+1 , c);
                 });
             }else{
                 setWord(text , changeOffset , true , true);
-                nextText(array , index+1 , text.length <= lengthMin);
+                nextText(array , index+1 , c);
             }
         }
     }, wordTime);
@@ -91,7 +93,7 @@ function nextText(array , index , changeOffset){
 function changeTextOffset(word){
     if(word.length == 0)removeTextOffset();
     else $('#text-container')
-        .attr('style' , 'margin-left: ' + getTextWidth(word.substring(0 , lengthMin+1), font)/2 + 'px');
+        .attr('style' , 'margin-left: ' + getTextWidth(word.substring(0 , lengthMax+1), font)/2 + 'px');
 }
 
 function removeTextOffset(){
