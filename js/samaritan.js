@@ -21,6 +21,7 @@ lengthMin = 3;
 completeMax = 4;
 font = '32px magdacleanmono-bold';
 chance = 0.5;
+smoothIncrement = 10;
 
 function blink() {
     $('.blink').fadeOut(750).fadeIn(750);
@@ -71,7 +72,7 @@ function getTextWidth(text, font) {
 function nextText(array , index , changeOffset){
     if(array == undefined)return;
     setTimeout(function(){
-        if(index == array.length)setWord('' , false);
+        if(index == array.length)setWord('' , false , true ,true);
         else{
             var text = array[index];
             changeOffset = changeOffset || text.length <= lengthMin;
@@ -80,7 +81,7 @@ function nextText(array , index , changeOffset){
                     nextText(array , index+1 , text.length <= lengthMin);
                 });
             }else{
-                setWord(text , changeOffset);
+                setWord(text , changeOffset , true , true);
                 nextText(array , index+1 , text.length <= lengthMin);
             }
         }
@@ -102,13 +103,33 @@ function setText(phrase){
     nextText(phrase.split(' ') , 0 , false);
 }
 
-function setWord(word , changeOffset){
+function setWord(word , changeOffset , changeSize , smooth){
     removeTextOffset();
     if(changeOffset)changeTextOffset(word);
 
     var text = $('#text');
+    var oldWord = text.text();
     text.text(word);
-    $('#line').attr('style' , 'width: '+ (word == '' ? 30 : getTextWidth(word , font))+'px;');
+    var size = word == '' ? 30 : getTextWidth(word , font);
+    if(changeSize)
+        if(smooth)smoothLineSize(size,oldWord == '' ? 30 : getTextWidth(oldWord , font));
+        else $('#line').attr('style' , 'width: '+ size +'px;');
+}
+
+function smoothLineSize(size , oldSize){
+    console.log('e' + size + ' ' + oldSize);
+    var i = oldSize;
+    var line = $('#line');
+    var id = setInterval(function () {
+        console.log(i);
+        if(size>oldSize?size<=i+smoothIncrement: size>=i+smoothIncrement){
+            line.attr('style' , 'width: '+ size +'px;');
+            clearInterval(id);
+            return;
+        }
+        line.attr('style' , 'width: '+ i +'px;');
+        i = size>oldSize ? i+smoothIncrement : i-smoothIncrement;
+    } , 1);
 }
 
 
@@ -128,6 +149,7 @@ function randomText(length){
 function setScrambled(originalText , changeOffset , onComplete){
     var complete = 0;
     var tmpText = randomText(originalText.length);
+    var first = true;
     var id = setInterval(function () {
         for(var i = 0; i < originalText.length ; i++){
             if(originalText.charAt(i) != tmpText.charAt(i)){
@@ -140,7 +162,8 @@ function setScrambled(originalText , changeOffset , onComplete){
                 }
             }
         }
-        setWord(tmpText , changeOffset);
+        setWord(tmpText , changeOffset , first , first);
+        first = false;
         if(tmpText == originalText){
             clearInterval(id);
             onComplete();
