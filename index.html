@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+    This file is part of Samaritan.
+
+    Samaritan is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Samaritan is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Samaritan. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Samaritan</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="img/logo.png">
+        <script src="js/jquery-1.12.1.min.js"></script>
+        <script src="js/samaritan.js"></script>
+    </head>
+    <body>
+        <div id="text-container">
+            <p id="text" class="center"></p>
+            <hr id="line" style="width: 30px;"/>
+        </div>
+        <div id="wait-container">
+            <div id="triangle" class="center blink"></div>
+            <div id="spinner" class="hidden">
+                <div id="left" class="circle blink"></div>
+                <div id="right" class="circle blink3"></div>
+                <div id="center" class="circle blink2"></div>
+            </div>
+        </div>
+    </body>
+</html>
