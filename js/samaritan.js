@@ -23,7 +23,6 @@ completeMax = 4;
 font = '32px magdacleanmono-bold';
 chance = 0.5;
 smoothIncrement = 10;
-
 function blink() {
     $('.blink').fadeOut(750).fadeIn(750);
 }
@@ -101,7 +100,7 @@ function removeTextOffset(){
 }
 
 function setText(phrase){
-    if(phrase == undefined)return;
+    if(phrase == undefined) phrase = "What are your orders?";
     nextText(phrase.split(' ') , 0 , false);
 }
 
